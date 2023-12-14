@@ -16,7 +16,7 @@ contenedorCategorias.addEventListener('click',(e)=>{
                 <a href="#" class="galeria__carousel-slide">
                     <img class="galeria__carousel-image" src="${foto.ruta}" alt="" />
                 </a>`;
-            galeria.querySelector('.galeria__carousel-slide').innerHTML += slide;
+            galeria.querySelector('.galeria__carousel-slides').innerHTML += slide;
         });
         galeria.querySelector('.galeria__carousel-slide').classList.add('galeria__carousel-slide--active');
     };

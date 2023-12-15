@@ -479,8 +479,11 @@ contenedorCategorias.addEventListener('click',(e)=>{
         galeria$2.classList.add('galeria--active');
         document.body.style.overflow = 'hidden';
 
-        const categoriaSelect = e.target.dataset.categoria;
+        const categoriaSelect = e.target.closest('a').dataset.categoria;
         const fotos = dataFotos.fotos[categoriaSelect];
+        const carrusel = document.querySelector('.galeria__carousel-slides') ;
+
+        carrusel.innerHTML = "";
 
         fotos.forEach((foto) => {
             const slide = `

@@ -1,6 +1,6 @@
 'use strict';
 
-var dataFotos = {
+var datos = {
 	fotos: {
 		america: [
 			{
@@ -431,7 +431,7 @@ var dataFotos = {
 	},
 };
 
-const { fotos } = dataFotos;
+const { fotos } = datos;
 
 var dataCategorias = {
 	categorias: [
@@ -489,7 +489,8 @@ contenedorCategorias.addEventListener('click',(e)=>{
 
         
         const categoriaSelect = e.target.closest('a').dataset.categoria;
-        const fotos = dataFotos.fotos[categoriaSelect];
+        galeria$2.dataset.categoria = categoriaSelect;
+        const fotos = datos.fotos[categoriaSelect];
         const carrusel = document.querySelector('.galeria__carousel-slides') ;
         
         const {id, nombre, ruta, descripcion} = fotos[0];
@@ -500,7 +501,7 @@ contenedorCategorias.addEventListener('click',(e)=>{
         fotos.forEach((foto) => {
             const slide = `
                 <a href="#" class="galeria__carousel-slide">
-                    <img class="galeria__carousel-image" src="${foto.ruta}" alt="" />
+                    <img class="galeria__carousel-image" src="${foto.ruta}" data-id='${foto.id}' alt="" />
                 </a>`;
             galeria$2.querySelector('.galeria__carousel-slides').innerHTML += slide;
         });
@@ -514,10 +515,27 @@ const cerrarGaleria =()=>{
     document.body.style.overflow = '';
 };
 
+const slideclick = (e)=>{
+    let nombre, ruta , descripcion;
+    const id = parseInt(e.target.dataset.id);
+    const galeria = document.getElementById('galeria');
+    const categoriaSelect = galeria.dataset.categoria;
+    datos.fotos[categoriaSelect].forEach((foto) => {
+        if(foto.id === id){
+            ruta = foto.ruta;
+            nombre = foto.nombre;
+            descripcion = foto.descripcion;
+        }
+    });
+    cargarImagen(id,nombre,ruta,descripcion);
+};
+
 const galeria = document.getElementById('galeria');
 galeria.addEventListener('click',(e)=>{
     const boton = (e.target.closest('button'));
     if(boton?.dataset?.accion === 'cerrar-galeria'){
         cerrarGaleria();
+    }    {
+        slideclick(e);
     }
 });

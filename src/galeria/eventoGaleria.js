@@ -7,7 +7,7 @@ galeria.addEventListener('click',(e)=>{
     if(boton?.dataset?.accion === 'cerrar-galeria'){
         cerrarGaleria();
     };
-    if('e.target.dataset.id'){
+    if(e.target.dataset.id){
         slideclick(e);
-    }
+    };
 })

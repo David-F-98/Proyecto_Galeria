@@ -476,7 +476,24 @@ const cargarImagen =(id, nombre, ruta, descripcion)=>{
     galeria$3.querySelector('.galeria__imagen').dataset.idImagen = id;
     galeria$3.querySelector('.galeria__titulo').innerText = nombre;
     galeria$3.querySelector('.galeria__descripcion-imagen-activa').innerText = descripcion;    
-};
+
+    const categoriaActual = galeria$3.dataset.categoria;
+    const fotos = datos.fotos[categoriaActual];
+
+    let indexImagenActual;
+    fotos.forEach((foto, index) => {
+        if(foto.id === id){
+            indexImagenActual = index;
+        }
+    });
+
+    
+    if(galeria$3.querySelectorAll('.galeria__carousel-slide').length > 0){
+
+        galeria$3.querySelector('.galeria__carousel-slide--active').classList.remove('galeria__carousel-slide--active');
+        
+        galeria$3.querySelectorAll('.galeria__carousel-slide')[indexImagenActual].classList.add('galeria__carousel-slide--active');
+    }};
 
 const contenedorCategorias = document.getElementById("categorias");
 const galeria$2 = document.getElementById('galeria');
@@ -535,7 +552,6 @@ galeria.addEventListener('click',(e)=>{
     const boton = (e.target.closest('button'));
     if(boton?.dataset?.accion === 'cerrar-galeria'){
         cerrarGaleria();
-    }    {
+    }    if(e.target.dataset.id){
         slideclick(e);
-    }
-});
+    }});

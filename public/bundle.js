@@ -572,6 +572,10 @@ const slideclick = (e)=>{
     cargarImagen(id,nombre,ruta,descripcion);
 };
 
+const carrusel = (direccion)=>{
+    console.log(direccion);
+};
+
 const galeria = document.getElementById('galeria');
 galeria.addEventListener('click',(e)=>{
     const boton = (e.target.closest('button'));
@@ -584,9 +588,17 @@ galeria.addEventListener('click',(e)=>{
     }
 
     if(boton?.dataset?.accion === 'siguiente-imagen'){
-        cargarAnteriorSiguiente('Siguiente');
+        cargarAnteriorSiguiente();
     }
     
     if(boton?.dataset?.accion === 'anterior-imagen'){
-        cargarAnteriorSiguiente('Anterior');
+        cargarAnteriorSiguiente();
+    }    
+
+    if(boton?.dataset?.accion === 'siguiente-slide'){
+        carrusel('siguiente');
+    }
+    
+    if(boton?.dataset?.accion === 'anterior-slide'){
+        carrusel('anterior');
     }});

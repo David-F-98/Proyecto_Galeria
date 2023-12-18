@@ -25,4 +25,29 @@ const cargarImagen =(id, nombre, ruta, descripcion)=>{
         galeria.querySelectorAll('.galeria__carousel-slide')[indexImagenActual].classList.add('galeria__carousel-slide--active');
     };
 };
-export {cargarImagen};
+
+const cargarAnteriorSiguiente =(direccion)=>{
+    const categoriaActual = galeria.dataset.categoria;
+    const fotos = data.fotos[categoriaActual];
+    const idImagenActual = parseInt(galeria.querySelector('.galeria__imagen').dataset.idImagen);
+
+    let indexImagenActual;
+    fotos.forEach((foto, index)=>{
+        if(foto.id === idImagenActual){
+            indexImagenActual = index;
+        }
+    })
+
+        if(direccion === 'Siguiente'){
+            if(fotos[indexImagenActual+1]){
+                const {id, nombre, ruta, descripcion}=fotos[indexImagenActual+1];
+                cargarImagen(id, nombre, ruta, descripcion);
+            }
+        } else if (direccion === 'Anterior') {
+            if(fotos[indexImagenActual-1]){
+                const {id, nombre, ruta, descripcion}=fotos[indexImagenActual-1];
+                cargarImagen(id, nombre, ruta, descripcion);
+            }
+        }
+}
+export {cargarImagen, cargarAnteriorSiguiente};

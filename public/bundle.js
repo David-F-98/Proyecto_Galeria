@@ -495,6 +495,31 @@ const cargarImagen =(id, nombre, ruta, descripcion)=>{
         galeria$3.querySelectorAll('.galeria__carousel-slide')[indexImagenActual].classList.add('galeria__carousel-slide--active');
     }};
 
+const cargarAnteriorSiguiente =(direccion)=>{
+    const categoriaActual = galeria$3.dataset.categoria;
+    const fotos = datos.fotos[categoriaActual];
+    const idImagenActual = parseInt(galeria$3.querySelector('.galeria__imagen').dataset.idImagen);
+
+    let indexImagenActual;
+    fotos.forEach((foto, index)=>{
+        if(foto.id === idImagenActual){
+            indexImagenActual = index;
+        }
+    });
+
+        if(direccion === 'Siguiente'){
+            if(fotos[indexImagenActual+1]){
+                const {id, nombre, ruta, descripcion}=fotos[indexImagenActual+1];
+                cargarImagen(id, nombre, ruta, descripcion);
+            }
+        } else if (direccion === 'Anterior') {
+            if(fotos[indexImagenActual-1]){
+                const {id, nombre, ruta, descripcion}=fotos[indexImagenActual-1];
+                cargarImagen(id, nombre, ruta, descripcion);
+            }
+        }
+};
+
 const contenedorCategorias = document.getElementById("categorias");
 const galeria$2 = document.getElementById('galeria');
 
@@ -552,6 +577,16 @@ galeria.addEventListener('click',(e)=>{
     const boton = (e.target.closest('button'));
     if(boton?.dataset?.accion === 'cerrar-galeria'){
         cerrarGaleria();
-    }    if(e.target.dataset.id){
+    }
+
+    if(e.target.dataset.id){
         slideclick(e);
+    }
+
+    if(boton?.dataset?.accion === 'siguiente-imagen'){
+        cargarAnteriorSiguiente('Siguiente');
+    }
+    
+    if(boton?.dataset?.accion === 'anterior-imagen'){
+        cargarAnteriorSiguiente('Anterior');
     }});

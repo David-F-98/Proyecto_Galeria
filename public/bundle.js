@@ -587,7 +587,17 @@ const carrusel = (direccion)=>{
             }
         });
 
-        if(direccion==='atras'); else if (direccion==='adelante'){
+        if(direccion==='atras'){
+            const primerSlideVisible = slideVisibles[0];
+            const indexPrimerSlideVisible = entradas.indexOf(primerSlideVisible);
+            if(indexPrimerSlideVisible >=1){
+                entradas[indexPrimerSlideVisible - 1].target.scrollIntoView({
+                    behavior:'smooth',
+                    inline: 'start',
+                });
+            }
+            
+        } else if (direccion==='adelante'){
             const ultimaSlideVisible = slideVisibles[slideVisibles.length - 1];
             const indexUltimoSlideVisible = entradas.indexOf(ultimaSlideVisible);
             if((entradas.length - 1)> indexUltimoSlideVisible){

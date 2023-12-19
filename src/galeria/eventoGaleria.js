@@ -5,33 +5,33 @@ import carrusel from "./carrusel";
 
 const galeria = document.getElementById('galeria');
 galeria.addEventListener('click',(e)=>{
-    const boton = (e.target.closest('button'));
+    const boton = e.target.closest('button');
     if(boton?.dataset?.accion === 'cerrar-galeria'){
         cerrarGaleria();
     };
 
 
-    if(e.target.dataset.id){
+    if(e.target?.dataset?.id){
         slideclick(e);
     };
 
 
     if(boton?.dataset?.accion === 'siguiente-imagen'){
-        cargarAnteriorSiguiente();
+        cargarAnteriorSiguiente('Siguiente');
     };
 
     
     if(boton?.dataset?.accion === 'anterior-imagen'){
-        cargarAnteriorSiguiente();
+        cargarAnteriorSiguiente('Anterior');
     };
     
 
     if(boton?.dataset?.accion === 'siguiente-slide'){
-        carrusel('siguiente');
+        carrusel('adelante');
     };
 
     
     if(boton?.dataset?.accion === 'anterior-slide'){
-        carrusel('anterior');
+        carrusel('atras');
     };
 })
